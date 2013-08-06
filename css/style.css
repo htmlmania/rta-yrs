@@ -40,3 +40,21 @@ option {
 		text-align: right;
 		width: 300px;
 		}
+
+.googleMap { 
+			display: block;
+			width:400;
+			height:280px;
+			border: 1px solid black;
+			}
+
+#well {
+			height: 450px;
+			}
+
+
+
+
+
+
+
