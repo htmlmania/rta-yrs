@@ -2820,8 +2820,8 @@ button.close {
 .navbar-nav > .active > a,
 .navbar-nav > .active > a:hover,
 .navbar-nav > .active > a:focus {
-  color: #555555;
-  background-color: #d5d5d5;
+  color: white;
+  background-color: #3c3373;
 }
 
 .navbar-nav > .disabled > a,
