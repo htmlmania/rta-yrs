@@ -54,18 +54,30 @@
 			<div>
 		
 				<script>
-						function initialize(){	
-							var mapProp = {
-							center:new google.maps.LatLng(51.508742,-0.120850),
-							zoom:12,
-							mapTypeId:google.maps.MapTypeId.ROADMAP
-						};
+						// Google Maps API version 3
 						
-						var map=new google.maps.Map(document.getElementById("googleMap")
-						,mapProp);
+						function initialize()
+						{	
+							var mapProp = 
+							{
+								center:new google.maps.LatLng(51.508742,-0.120850),
+								zoom:12,
+								mapTypeId:google.maps.MapTypeId.ROADMAP
+							};
+						
+						var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+						
+						google.maps.event.addListener(map, 'dragend', function showCorners()
+						{
+							var latLng = map.getBounds();
+							alert(latLng);
+						});
+						
 						}
-
+						
 						google.maps.event.addDomListener(window, 'load', initialize);
+
+						
 				</script>
 				
 				
