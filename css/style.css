@@ -22,9 +22,6 @@ h1 {
 		font-weight: bold;
 	}
 	
-span2:hover {
-			background-color:black;
-			}
 	
 .well { 
 		margin-top:100px;
@@ -36,4 +33,10 @@ select: {
 
 option {
 		width:100px;
+	}
+	
+.input {
+		
+		text-align: right;
+		width: 300px;
 		}
