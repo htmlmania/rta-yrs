@@ -1,0 +1,48 @@
+.navbar, .btn-default {
+    background: #b5d5ff;
+}
+.btn-default:hover {
+    background: #a4bddf;
+}
+.nav li {
+    height: 100px;
+}
+.nav li a {
+    height: 100px;
+    padding-top: 34px;
+}
+.nav li.active a {
+    background: #3C3372;
+    color: #ddd;
+}
+.nav li.active a:hover {
+    background: #3C3372;
+    color: #aaa;
+}
+.nav li a:hover {]
+    color: #3C3372;
+}
+.navbar h1 {
+    margin-top: 10px
+}
+.container {
+    height: 100px;
+}
+.tab-pane {
+    padding: 25px;
+}
+.tooltip {
+    min-width: 100%;
+}
+.mt {
+    margin-top: 15px;
+}
+.mb {
+    margin-bottom: 15px;
+}
+.ml {
+    margin-left: 15px;
+}
+.mr {
+    margin-right: 15px;
+}

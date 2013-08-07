@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<link href="css/bootstrap.css" rel="stylesheet" media="screen">
+
+<link href="css/style.css" rel="stylesheet">
+
+<script src="http://code.jquery.com/jquery.js"></script>
+
+<script src="js/bootstrap.js"></script>
+
+</head>
+
+<body>
+
+ 
+
+
+
+ 
+
+</body>
+
+</html>
+<!doctype html>
+<html>
+    <head>
+        <title>Positioning Map</title>
+        <link href="css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="css/style.css" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery.js"></script>
+        <script src="js/bootstrap.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="navbar navbar-fixed-top" style ="background-color:#b5d5ff">
+                <a class="navbar-brand" href="#">Roadkill</a>
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Roadkill</a></li>
+                    <li><a href="#">Link</a></li>
+                    <li><a href="#">Link</a></li>
+                </ul>
+            </div>
+        </div>
+        <script src="http://code.jquery.com/jquery.js"></script>  
+        <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyCrtUet1AJAW8YUEjMOCLz1Mv4_iNPYSHI&sensor=false"></script>
+        <script>
+            function initialize() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(load, error);
+                } else {
+                    load({
+                        'coords': {
+                            'latitude': 51.48536,
+                            'longitude': -3.18329
+                        }
+                    });
+                }
+            }
+            function error(error) {
+                load({
+                    'coords': {
+                        'latitude': 51.48536,
+                        'longitude': -3.18329
+                    }
+                });
+            }
+            var map;
+            
+            var high = 0;
+            function load(pos) {
+                var mapOptions = {
+                    zoom: 12,
+                    center: new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude),
+                    mapTypeId: google.maps.MapTypeId.HYBRID
+                };
+                
+                map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                
+                $.get('http://bochdewi.co.uk/yrs/tests/places.php', function (data) {
+                    var json = $.parseJSON(data);
+                    json = json.response.results;
+                    for (var i=0,len=json.length; i<len; i++) {
+                        var obj = json[i];
+                        var plc = obj.country + '/' + obj.city;
+                        if (ss({ 'plc': plc, 'r': 100 })) {
+                            continue;
+                        }
+                    }
+                    setTimeout(function () {
+                    console.log(high);
+                    }, 75000);
+                });
+            }
+            function ss(rc) {
+                var cols = {1: '#FFFF00',2:'#ff0000'};
+                $.get('http://bochdewi.co.uk/yrs/tests/algo.php?place=' + rc.plc, function(data) {
+                    data = $.parseJSON(data);
+                    if (data.value > 0) {
+                        if (data.value > high) high = data.value;
+                        var rectangle = new google.maps.Rectangle({
+                            strokeColor: cols[data.value],
+                            strokeOpacity: 0.5,
+                            strokeWeight: 2,
+                            fillColor: cols[data.value],
+                            fillOpacity: 0.5,
+                            map: map,
+                            bounds: new google.maps.LatLngBounds(
+                                new google.maps.LatLng(data.lat-(rc.r/1000), data.long-(rc.r/1000)),
+                                new google.maps.LatLng(data.lat+(rc.r/1000), data.long+(rc.r/1000)*2.3)
+                            )
+                        });
+                    }
+                    return true;
+                });
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+        <div id="map-canvas" style="height:650px;"></div>
+    </body>
+</html>

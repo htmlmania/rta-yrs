@@ -1,6 +1,7 @@
 <!DOCTYPE html>  
 <html>  
   <head>
+	<meta charset="utf-8">
     <title>Input</title>
     <link href="css/bootstrap.css" rel="stylesheet" media="screen">
     <link href="css/style.css" rel="stylesheet">   
@@ -27,32 +28,17 @@
 		<div class="well" id="well">
 			<h1>Data Input</h1>
 				<form>
-					<div>
-						Number of vehicles:
-							<select name="number">
-								<option value="1">1</option>
-								<option value="2">2</option>
-								<option value="3">3</option>
-								<option value="4">4</option>
-								<option value="5">5</option>
-								<option value="6">6</option>
-								<option value="7">7</option>
-								<option value="8">8</option>
-								<option value="9">9</option>
-								<option value="10">More than 9.</option>
-						</select>
-					</div>
-					<br>
+				
+					
 				<div class="input">
-			<form >
-					Post Code: <input type="text" name="postcode">
-					Lattitude: <input type="text" name="lattitude">
-					Longitude: <input type="text" name="longitude">
-				</div>
-			</form>
+				<form >
+					Lattitude: <input type="text" name="lattitude" id="lattitude">
+					Longitude: <input type="text" name="longitude" id="longitude">
+							   <button id="submit">Submit</button>
+				</form>
+			</div>
 			
 			<div>
-		
 				<script>
 						// Google Maps API version 3
 						
@@ -60,24 +46,42 @@
 						{	
 							var mapProp = 
 							{
-								center:new google.maps.LatLng(51.508742,-0.120850),
+								center:new google.maps.LatLng(51.480341,-3.18164),
 								zoom:12,
 								mapTypeId:google.maps.MapTypeId.ROADMAP
 							};
-						
-						var map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-						
-						google.maps.event.addListener(map, 'dragend', function showCorners()
-						{
-							var latLng = map.getBounds();
-							alert(latLng);
-						});
-						
+							map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+
+							google.maps.event.addListener(map, 'dragend', function showCorners()
+							{
+								var latLng = map.getBounds();
+								alert(latLng);
+							});
+
 						}
 						
-						google.maps.event.addDomListener(window, 'load', initialize);
+					google.maps.event.addDomListener(window, 'load', initialize);
 
-						
+				
+							function clickMe() {
+								var elem = document.querySelector("#submit");
+								elem.addEventListener('click', changeCenter);
+								alert("Clicked");
+												}
+			
+							function changeCenter() {
+								var inLat = document.querySelector("#lattitude");
+								var lat = inLat.value;
+								var inLng = document.querySelector("#longitude");
+								var lng = inLng.value;
+									alert(lng + lat); 					
+								map.setCenter(new google.maps.LatLng(51.0, 0.0));
+												 }
+
+							addEventListener('load', clickMe);
+
+				
+				
 				</script>
 				
 				
